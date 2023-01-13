@@ -33,17 +33,6 @@ bool test5x4Matrix(HungarianAlgorithm<float> &hungAlgProblem);
 
 int main(int argc, const char *argv[])
 {
-      Eigen::MatrixXd costFcnMatrix(4, 2);
-  costFcnMatrix << 71.36, 32.97, 82.23, 84.51, 75.62, 70.86, 69.42, 87.11;
-  // Initialize the Hungarian algorithm object with the costFcnMatrix
-  auto problem = HungarianAlgorithm<double>(costFcnMatrix);
-  // Solve the assignment problem 
-  problem.SolveAssignmentProblem();
-  // Get the assignment results
-  Eigen::MatrixXi assignmentMatrix(4, 2);
-  problem.GetAssignmentMatrix(assignmentMatrix);
-  std::cout << assignmentMatrix;
-  return 0;
     // Specify and run some simple tests
     std::vector<int> bTestsPassedVector = {false, false, false};
     // Test 3x3 <int> matrix
@@ -68,12 +57,15 @@ int main(int argc, const char *argv[])
 bool test3x3Matrix()
 {
     bool testPassed = true;
+    std::cout << "[Testing 3x3 Matrix]\n";
 
     // Create and initialize the cost function matrix
     Eigen::Matrix3i costFcnMatrix;
     costFcnMatrix << 40, 60, 15,
         25, 30, 45,
         55, 30, 25;
+    std::cout << "Cost Matrix:\n"
+              << costFcnMatrix << "\n";
     // Initialize the Hungarian algorithm object with the costFcnMatrix
     auto hungAlgProblem = HungarianAlgorithm<int>(costFcnMatrix);
     // Solve the assignment problem
@@ -82,6 +74,8 @@ bool test3x3Matrix()
     // Get the assignment results
     Eigen::MatrixXi assignmentMatrix(3, 3);
     hungAlgProblem.GetAssignmentMatrix(assignmentMatrix);
+    std::cout << "Assignment Matrix:\n"
+              << assignmentMatrix << "\n";
     // Compare to the expected results
     Eigen::Matrix3i expectedMatrix;
     expectedMatrix << 0, 0, 1,
@@ -121,15 +115,14 @@ bool test3x3Matrix()
         testPassed = false;
         std::cout << "ERROR: Incorrect col indexing for 3x3 problem!\n";
     }
-    // Add trailing empty line
-    std::cout << "\n";
-
+    std::cout << "----------\n";
     return testPassed;
 }
 
 bool test4x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
 {
     bool testPassed = true;
+    std::cout << "[Testing 4x4 Matrix]\n";
 
     // Create and initialize the cost function matrix
     Eigen::Matrix4f costFcnMatrix;
@@ -137,6 +130,8 @@ bool test4x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
         8.1, 3.2, 10.1, 8.3,
         12.8, 5.3, 4.5, 5.1,
         6.2, 3.1, 7.9, 14.5;
+    std::cout << "Cost Matrix:\n"
+              << costFcnMatrix << "\n";
     // Assign the cost function to the Hungarian algorithm object
     hungAlgProblem.SetCostFunctionMatrix(costFcnMatrix);
     // Solve the assignment problem
@@ -145,6 +140,8 @@ bool test4x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
     // Get the assignment results
     Eigen::MatrixXi assignmentMatrix(4, 4);
     hungAlgProblem.GetAssignmentMatrix(assignmentMatrix);
+    std::cout << "Assignment Matrix:\n"
+              << assignmentMatrix << "\n";
     // Compare to the expected results
     Eigen::Matrix4i expectedMatrix;
     expectedMatrix << 0, 0, 1, 0,
@@ -185,15 +182,14 @@ bool test4x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
         testPassed = false;
         std::cout << "ERROR: Incorrect col indexing for 4x4 problem!\n";
     }
-    // Add trailing empty line
-    std::cout << "\n";
-
+    std::cout << "----------\n";
     return testPassed;
 }
 
 bool test5x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
 {
     bool testPassed = true;
+    std::cout << "[Testing 5x4 Matrix]\n";
 
     // Create and initialize the cost function matrix
     Eigen::MatrixXf costFcnMatrix(5, 4);
@@ -202,6 +198,8 @@ bool test5x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
         21, 23, 35, 29,
         42, 27, 21, 17,
         16, 15, 28, 25;
+    std::cout << "Cost Matrix:\n"
+              << costFcnMatrix << "\n";
     // Assign the cost function to the Hungarian algorithm object
     hungAlgProblem.SetCostFunctionMatrix(costFcnMatrix);
     // Solve the assignment problem
@@ -210,6 +208,8 @@ bool test5x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
     // Get the assignment results
     Eigen::MatrixXi assignmentMatrix(5, 4);
     hungAlgProblem.GetAssignmentMatrix(assignmentMatrix);
+    std::cout << "Assignment Matrix:\n"
+              << assignmentMatrix << "\n";
     // Compare to the expected results
     Eigen::Matrix<int, 5, 4> expectedMatrix;
     expectedMatrix << 0, 0, 1, 0,
@@ -251,8 +251,6 @@ bool test5x4Matrix(HungarianAlgorithm<float> &hungAlgProblem)
         testPassed = false;
         std::cout << "ERROR: Incorrect col indexing for 5x4 problem!\n";
     }
-    // Add trailing empty line
-    std::cout << "\n";
-
+    std::cout << "----------\n";
     return testPassed;
 }
